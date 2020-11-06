@@ -47,6 +47,9 @@ const fields = ['name','phone','email','action']
               items={allbuisness.data}
               fields={fields}
               itemsPerPage={10}
+              itemsPerPageSelect
+             
+               tableFilter
               pagination
               scopedSlots = {{
                 'action':

@@ -71,14 +71,16 @@ const getBadge = status => {
           <CCard>
             <CCardHeader>
               Categories
-              <DocsLink name="CModal"/>
+          
             </CCardHeader>
             <CCardBody>
              {categorydata ?       <CDataTable
                items={categorydata}
               fields={fields}
+              itemsPerPageSelect
+             itemsPerPage={10}
+              tableFilter
            
-              itemsPerPage={10}
               pagination
               scopedSlots = {{
                 'action':

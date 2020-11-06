@@ -17,19 +17,13 @@ export const doLogin = (data) => {
 //userdata
 
 export const userData = (data) => {
-  
     return axios
-    ({url: `${API_BASE_URL_LOCAL}/users`, 
-    data: '',
-    method: 'GET',
-    headers:headertoken
-    })
-    .then(response => response)
-    .catch(err => err.response);
+		.get(`${API_BASE_URL_LOCAL}/users`, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
 } 
-
-
-
 
 export const registerUser = (data) => {
 	return axios
@@ -37,32 +31,28 @@ export const registerUser = (data) => {
 		.then(response => response)
 		.catch(err => err.response);
 }
+
+
 export const deleteUser = (data) => {
-  
-  return axios
-  ({url: `${API_BASE_URL_LOCAL}/delete-category/${data}`, 
-  method: 'DELETE',
-  headers:headertoken
-  })
-  .then(response => response)
-  .catch(err => err.response);
-} 
-
-
+	return axios
+		.delete(`${API_BASE_URL_LOCAL}/delete-category/${data}`, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
+}
 
 //categorydata
+
+
 export const categoryData = (data) => {
   return axios
-  ({url: `${API_BASE_URL_LOCAL}/categories`, 
-  data: '',
-  method: 'GET',
-  headers: headertoken
+  .get(`${API_BASE_URL_LOCAL}/categories`, {
+    headers: headertoken
   })
   .then(response => response)
   .catch(err => err.response);
 } 
-
-
 
 export const createCategory = (data) => {
 	return axios
@@ -72,33 +62,37 @@ export const createCategory = (data) => {
 		.then(response => response)
 		.catch(err => err.response);
 }
-export const deleteCategory = (data) => {
-  
-  return axios
-  ({url: `${API_BASE_URL_LOCAL}/delete-category/${data}`, 
-  method: 'DELETE',
-  headers:headertoken
-  })
-  .then(response => response)
-  .catch(err => err.response);
-} 
 
-export const getCategoryById = (id) => {
-  return axios({url: (`${API_BASE_URL_LOCAL}/getCat/${id}`), 
-    method: 'GET',
-    headers:headertoken
-  })
-  .then(response => response)
-  .catch(err => err.response);
+
+export const deleteCategory = (data) => {
+	return axios
+		.delete(`${API_BASE_URL_LOCAL}/delete-category/${data}`, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
 }
 
+
+
+export const getCategoryById = (id) => {
+	return axios
+		.get(`${API_BASE_URL_LOCAL}/getCat/${id}`, {
+      	headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
+}
+
+
+
 export const getSubcatById = (id) => {
-  return axios({url: (`${API_BASE_URL_LOCAL}/getSubCat/${id}`), 
-    method: 'GET',
-    headers:headertoken
-  })
-  .then(response => response)
-  .catch(err => err.response);
+	return axios
+		.get(`${API_BASE_URL_LOCAL}/getSubCat/${id}`, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
 }
 
 export const editCategory = (data) => {
@@ -110,28 +104,22 @@ export const editCategory = (data) => {
 		.catch(err => err.response);
 }
 
-/* export const editCategory = (data,id) => {
-  return axios({url: (`${API_BASE_URL_LOCAL}/update-category/${id}`,data), 
-    method: 'PUT',
-    headers:headertoken
-  })
-  .then(response => response)
-  .catch(err => err.response);
-} */
+
 
 //allbuisness
 
+
+
 export const allBuisness = (data) => {
-  
   return axios
-  ({url: `${API_BASE_URL_LOCAL}/all-businesses`, 
-  data: '',
-  method: 'GET',
-  headers:headertoken
+  .get(`${API_BASE_URL_LOCAL}/all-businesses`, {
+    headers: headertoken
   })
   .then(response => response)
   .catch(err => err.response);
 } 
+
+
 export const createBuisness = (data) => {
 	return axios
 		.post(`${API_BASE_URL_LOCAL}/create-business`, data, {
@@ -149,3 +137,13 @@ export const getBuisnessById = (id) => {
   .then(response => response)
   .catch(err => err.response);
 }
+
+
+// export const getBuisnessById = (id) => {
+// 	return axios
+// 		.post(`${API_BASE_URL_LOCAL}/businesses-by-category/${id}`, {
+//       	headers: headertoken
+// 		})
+// 		.then(response => response)
+// 		.catch(err => err.response);
+// }

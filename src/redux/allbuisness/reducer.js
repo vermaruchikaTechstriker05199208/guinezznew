@@ -2,7 +2,8 @@ const INIT_STATE = {
    
     business_list: {},
     buisness_id:{},
-    isAdded: false,
+    create_buisness:{},
+     isAdded: false,
     error: ""
 };
 
@@ -19,6 +20,7 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 isAdded: true,
+                create_buisness:action.payload,
                 error: "",
             };
             case "BUISNESS_DATA_ID":

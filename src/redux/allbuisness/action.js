@@ -23,7 +23,7 @@ export const get_buisnsess_data = payload => async dispatch => {
 export const create_business = payload => async dispatch => {
   let response = await createBuisness(payload);
   response = checkResponse(response);
-  console.log(response,'ffff')
+  console.log(response.message,'ffff')
   if (response.success) {
     dispatch({
       type: "CREATE_BUISNESS",

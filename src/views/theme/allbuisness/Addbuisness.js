@@ -131,12 +131,13 @@ return is_valid;
 	async handleSubmit(event) {
     const {isAdded} = this.props.user;
 		event.preventDefault();
-    if (!this.formValidate()) {
-			return;
-    }
-    alert('helloo')
+    // if (!this.formValidate()) {
+		// 	return;
+    // }
+    // alert('helloo')
 		const { data,latitude,longitude } = this.state;
-  
+    const business = this.props.allbuisness.create_buisness.status;
+    console.log(business,'123445')
 		const payload = {
       name: data.name,
      phone:data.phone,
@@ -159,21 +160,24 @@ return is_valid;
     };
 
     await this.props.create_business(payload);
-    {isAdded == true ?  toast.success("Category added sucessfully.") : toast.success("no Category added, data is invalid ")}
-
+   {business === 201  ?  toast.success("Buisness added sucessfully.") :  toast.success("invalid data")}
 	}
 
 
   render() {
   const subcategory = this.props.category.subcategoryid_list.categories;
   const categorydata = this.props.category.category_list.categories;
-  console.log(categorydata,'status')
+  const businessneww = this.props.allbuisness.create_buisness.data;
+
   const { data, errors, latitude, longitude } = this.state;
   const subid = data.cat_id;
- console.log(subid,'catid')
+
   // console.log(categorydata,'categorydata')
   return (
+
+    
     <>
+ 
      <CCard>
             <CCardHeader>
               Add Buisness 

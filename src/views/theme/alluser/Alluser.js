@@ -71,8 +71,9 @@ const getBadge = action => {
              {tabledata ?  <CDataTable
               items={tabledata}
               fields={fields}
-           
-              itemsPerPage={10}
+              itemsPerPageSelect
+             itemsPerPage={10}
+              tableFilter
               pagination
               scopedSlots = {{
                 'action':

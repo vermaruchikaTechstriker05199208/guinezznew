@@ -34,18 +34,7 @@ export default [
         name: 'Add',
         to: '/adduser',
       },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   name: '',
-      //   to: '/edituser/',
     
-      // },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   name: '',
-      //   to: '/viewuser/',
-    
-      // },
       
       
     ],
@@ -69,23 +58,11 @@ export default [
         name: 'Add Buisness',
         to: '/addbuisness',
       },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   name: '',
-      //   to: '/editbuisness/:clientId ',
-      // },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   name: '',
-      //   to: '/viewbuisness/:clientId ',
-      // },
+    
       
     ],
   },
-  // {
-  //   _tag: 'CSidebarNavTitle',
-  //   _children: ['Components']
-  // },
+
 
   {
     _tag: 'CSidebarNavDropdown',
@@ -109,55 +86,14 @@ export default [
         name: 'Add Sub category',
         to: '/subcategory',
       },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   // name: 'Edit category',
-      //   to: '/editcategory/:clientId',
-      // },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   // name: 'Edit category',
-      //   to: '/viewcategory/:clientId',
-      // },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   // name: 'Edit category',
-      //   to: '/editsubcategory/:clientId',
-      // },
+
       
     ],
   },
  
 
 
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Pages',
-    route: '/pages',
-    icon: 'cil-star',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Login',
-        to: '/login',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Register',
-        to: '/register',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Error 404',
-        to: '/404',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Error 500',
-        to: '/500',
-      },
-    ],
-  },
+
   
 
 ]

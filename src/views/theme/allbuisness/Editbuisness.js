@@ -109,7 +109,7 @@ render() {
     <>
      <CCard>
             <CCardHeader>
-              EDit User
+              Edit Buisness
               
             </CCardHeader>
             <CCardBody>

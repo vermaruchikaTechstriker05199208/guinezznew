@@ -55,18 +55,10 @@ class Viewbuisness extends React.Component {
 
     componentDidMount = async () => {
          await this.props.get_buisness_data_byid(this.props.match.params.clientId);
-    
-        //  let selectedClient = this.props.category.categoryid_list.category;
-
-        
-        // await this.setState({
-        //   data: selectedClient,
-        //   id: this.props.match.params.clientId
-        // });
       }
   render() {
   const buisnessdata = this.props.allbuisness.buisness_id.message;
-
+console.log(this.props.match.params.clientId,'clientt')
  console.log(buisnessdata,'data')
 
   return (

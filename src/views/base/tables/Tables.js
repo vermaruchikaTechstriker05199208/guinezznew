@@ -31,7 +31,7 @@ const Tables = () => {
           <CCard>
             <CCardHeader>
               Simple Table
-              <DocsLink name="CModal"/>
+     
             </CCardHeader>
             <CCardBody>
             <CDataTable

@@ -100,9 +100,7 @@ class Login extends React.Component {
 
   componentDidMount = async () => {
   
-    if (localStorage.getItem('user') && localStorage.getItem('user') !== undefined) {
-      this.props.history.push("/dashboard");
-    }
+ 
     if (localStorage.getItem('sendemail') !== undefined && localStorage.getItem('sendemail') !== "") {
       this.setState({
         sucsess: localStorage.getItem('sendemail')
@@ -150,12 +148,8 @@ class Login extends React.Component {
     this.props
       .do_login({ email, password })
       .then(async () => { 
-        
-        var user = localStorage.getItem('user');
-				user = JSON.parse(user);
-				localStorage.setItem("email", email);
-        
-        const message = this.props.auth.user.status;
+        	localStorage.setItem("email", email);
+         const message = this.props.auth.user.status;
         {message ==200 ? this.props.history.push("/dashboard") : this.props.history.push("/login");}
         console.log(message,'hellooo')
 this.setState({
