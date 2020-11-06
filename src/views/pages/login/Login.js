@@ -18,6 +18,8 @@ import CIcon from '@coreui/icons-react'
 import { connect } from "react-redux";
 import { do_login } from "../../../redux/auth/action";
 import validators from '../../pages/validators';
+// import Logoimage from "../images/logo.png";
+import Logowhite from "../../../images/logo_white.png";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -99,7 +101,9 @@ class Login extends React.Component {
   }
 
   componentDidMount = async () => {
-  
+    if (localStorage.getItem('user') && localStorage.getItem('user') != undefined) {
+       this.props.history.push("/login");
+    }
  
     if (localStorage.getItem('sendemail') !== undefined && localStorage.getItem('sendemail') !== "") {
       this.setState({
@@ -148,11 +152,15 @@ class Login extends React.Component {
     this.props
       .do_login({ email, password })
       .then(async () => { 
+        var user = localStorage.getItem('user');
+        user = JSON.parse(user);
         	localStorage.setItem("email", email);
          const message = this.props.auth.user.status;
         {message ==200 ? this.props.history.push("/dashboard") : this.props.history.push("/login");}
+
         console.log(message,'hellooo')
-this.setState({
+        this.setState({showMessage: true});
+        this.setState({
           isLogin: false
         });
       })
@@ -188,9 +196,10 @@ this.setState({
                       </CInputGroupPrepend>
                       
                       <CInput type="email"   id="email"  name="email" value={this.state.email}   onChange={this.onInputChange}
-          placeholder="Email" autoComplete="username" />
+                     placeholder="Email" autoComplete="username" />
                     </CInputGroup>
-                    {this.showErrors("email")}
+                    <div style={{color: "red"}}><h5>  {this.showErrors("email")}</h5></div>
+                   
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -206,7 +215,8 @@ this.setState({
                           
                           placeholder="Password" autoComplete="current-password" />
                     </CInputGroup>
-                    {this.showErrors("password")}
+                    <div style={{color: "red"}}><h5>  {this.showErrors("password")}</h5></div>
+                  
                     <CRow>
                       <CCol xs="6">
                         
@@ -218,7 +228,7 @@ this.setState({
 														onClick={this.doLogin}
 														size="lg"
 														type="submit"
-														block
+
 														disabled={!this.validForm()}
 													>
 														Log In
@@ -230,18 +240,22 @@ this.setState({
 														onClick={this.doLogin}
 														size="lg"
 														type="submit"
-														block
+													
 														disabled={isLogin}
 													>
 													
 														Log In
 
 													</CButton>
+                       
 												) : ''}
+                       
  </CCol>
-                      <CCol xs="12">
 
-                   
+                      <CCol xs="12">
+                        <div style={{color: "red"}} >  <h5>{this.state.showMessage && <p>Invalid Login</p>}</h5></div>
+                    
+                     
                       </CCol>
                    
                       <CCol xs="6" className="text-right">
@@ -254,6 +268,7 @@ this.setState({
               <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
+                    <img src={Logowhite}></img>
                     <h2>Sign up</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                       labore et dolore magna aliqua.</p>

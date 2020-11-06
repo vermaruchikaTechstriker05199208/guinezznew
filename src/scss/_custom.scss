@@ -1,1 +1,41 @@
 // Here you can add other styles
+
+.bg-primary {
+    background-color:#cf7419 !important;
+}
+.btn-primary {
+    color: #cf7419;
+    background-color: #fff;
+    border-color: #cf7419;
+   
+}
+.btn-primary:hover {
+    color: #cf7419;
+    background-color: #fff;
+    border-color: #cf7419;
+}
+.c-sidebar {
+    color: #fff;
+    background: #cf7419;
+}
+.c-sidebar .c-sidebar-nav-link:hover, .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
+    color: #cf7419;
+    background: #fff;
+}
+.c-sidebar .c-sidebar-nav-dropdown.c-show .c-sidebar-nav-link, .c-sidebar .c-sidebar-nav-dropdown.c-show .c-sidebar-nav-dropdown-toggle {
+    color: #cf7419;
+}
+.btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #cf7419;
+    border-color: #fff;
+}
+
+.btn-link:hover {
+    color: #cf7419;
+    text-decoration: underline;
+}
+.btn-link{
+    color: #cf7419;
+    text-decoration: underline;
+}

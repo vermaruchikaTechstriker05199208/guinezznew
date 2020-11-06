@@ -96,7 +96,7 @@ if(data){
    
     };
 await this.props.create_category(payload);
-toast.success("Category added sucessfully.")
+
 {payload ?  toast.success("Category added sucessfully.") : toast.success("no Category added, data is invalid ")}
   }
 }
