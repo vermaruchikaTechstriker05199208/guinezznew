@@ -16,7 +16,7 @@ const TheHeaderDropdownNotif = () => {
       inNav
       className="c-header-nav-item mx-2"
     >
-      <CDropdownToggle className="c-header-nav-link" caret={false}>
+      {/* <CDropdownToggle className="c-header-nav-link" caret={false}>
         <CIcon name="cil-bell"/>
         <CBadge shape="pill" color="danger">{itemsCount}</CBadge>
       </CDropdownToggle>
@@ -47,8 +47,8 @@ const TheHeaderDropdownNotif = () => {
           </div>
           <CProgress size="xs" color="info" value={25} />
           <small className="text-muted">348 Processes. 1/4 Cores.</small>
-        </CDropdownItem>
-        <CDropdownItem className="d-block">
+        </CDropdownItem> */}
+        {/* <CDropdownItem className="d-block">
           <div className="text-uppercase mb-1">
             <small><b>Memory Usage</b></small>
           </div>
@@ -61,8 +61,8 @@ const TheHeaderDropdownNotif = () => {
           </div>
           <CProgress size="xs" color="danger" value={90} />
           <small className="text-muted">243GB/256GB</small>
-        </CDropdownItem>
-      </CDropdownMenu>
+        </CDropdownItem> */}
+      {/* </CDropdownMenu> */}
     </CDropdown>
   )
 }

@@ -28,8 +28,8 @@ const routes = [
 
   { path: '/allusers', name: 'All user', component: Alluser },
   { path: '/adduser', name: 'Add user', component: Adduser},
-  { path: '/edituser/', name: 'Edit user', component: Edituser },
-  { path: '/viewuser/', name: ' View user', component: Viewuser },
+  { path: '/edituser/:clientId', name: 'Edit user', component: Edituser },
+  { path: '/viewuser/:clientId', name: ' View user', component: Viewuser },
   { path: '/allbuisness', name: 'All buisness', component: Allbuisness },
   { path: '/addbuisness', name: 'Add buisness', component: Addbuisness },
   { path: '/editbuisness', name: 'Edit buisness', component: Editbuisness },

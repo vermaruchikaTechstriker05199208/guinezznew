@@ -20,6 +20,7 @@ import { do_login } from "../../../redux/auth/action";
 import validators from '../../pages/validators';
 // import Logoimage from "../images/logo.png";
 import Logowhite from "../../../images/logo_white.png";
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -101,9 +102,9 @@ class Login extends React.Component {
   }
 
   componentDidMount = async () => {
-    if (localStorage.getItem('user') && localStorage.getItem('user') != undefined) {
-       this.props.history.push("/login");
-    }
+    // if (localStorage.getItem('user') && localStorage.getItem('user') != undefined) {
+    //    this.props.history.push("/dashboard");
+    // }
  
     if (localStorage.getItem('sendemail') !== undefined && localStorage.getItem('sendemail') !== "") {
       this.setState({
@@ -156,9 +157,9 @@ class Login extends React.Component {
         user = JSON.parse(user);
         	localStorage.setItem("email", email);
          const message = this.props.auth.user.status;
-        {message ==200 ? this.props.history.push("/dashboard") : this.props.history.push("/login");}
+        {message ==200 ? this.props.history.push("/allusers") : this.props.history.push("/login");}
 
-        console.log(message,'hellooo')
+
         this.setState({showMessage: true});
         this.setState({
           isLogin: false
@@ -188,6 +189,8 @@ class Login extends React.Component {
                   <CForm>
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
+                    <div style={{color: "red"}} >  <h5>{this.state.showMessage && 'Invalid Login'}</h5></div>
+                 
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -252,11 +255,7 @@ class Login extends React.Component {
                        
  </CCol>
 
-                      <CCol xs="12">
-                        <div style={{color: "red"}} >  <h5>{this.state.showMessage && <p>Invalid Login</p>}</h5></div>
-                    
-                     
-                      </CCol>
+                   
                    
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
@@ -272,9 +271,7 @@ class Login extends React.Component {
                     <h2>Sign up</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                       labore et dolore magna aliqua.</p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
-                    </Link>
+                
                   </div>
                 </CCardBody>
               </CCard>

@@ -84,8 +84,10 @@ return is_valid;
     };
 
     await this.props.create_category(payload);
-    // toast.success("Category added sucessfully.")
-
+     
+     const categorydatastatus = this.props.category.create_category.data.status;
+     {categorydatastatus == 201 ? toast.success("Category added sucessfully.") : toast.error("THe given data was invalid")}
+     console.log(this.props.category.create_category.data,'nojgh')
 	}
 
   componentDidMount = async () => {
@@ -93,7 +95,8 @@ return is_valid;
     
   }
   render() {
-  const categorydata = this.props.category;
+
+  
   const {isAdded} = this.props.category;
 
   const { data, errors } = this.state;

@@ -110,33 +110,26 @@ render() {
      <CCard>
             <CCardHeader>
               Edit Buisness
-              
-            </CCardHeader>
+             </CCardHeader>
             <CCardBody>
               <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
           <CFormGroup row>
-                
-                <CCol md="3">
+                 <CCol md="3">
                   <CLabel htmlFor="select">Name</CLabel>
                 </CCol>
-                
-                <CCol xs="12" md="9">
+                 <CCol xs="12" md="9">
                 <CInput  name="first_name"
                         id="first_name"
                         onChange={this.handleChange.bind(this)} 
                         value={data.first_name}
                       
 											  placeholder="Enter name" />
-                   
-                </CCol>
-               
-              </CFormGroup>
+                    </CCol>
+                </CFormGroup>
               <CFormGroup row>
-                
-                <CCol md="3">
+                 <CCol md="3">
                   <CLabel htmlFor="select">Description</CLabel>
                 </CCol>
-                
                 <CCol xs="12" md="9">
                 <CInput 
 					          	name="email"
@@ -144,32 +137,25 @@ render() {
                         onChange={this.handleChange.bind(this)} 
                         value={data.email}
                         placeholder="Enter email" />
-                    
-                </CCol>
-               
-              </CFormGroup>
+                    </CCol>
+               </CFormGroup>
               <CFormGroup row>
-                
-                <CCol md="3">
+                 <CCol md="3">
                   <CLabel htmlFor="select">Phone</CLabel>
                 </CCol>
-                
-                <CCol xs="12" md="9">
+                 <CCol xs="12" md="9">
                 <CInput 
 					          	name="phone"
                         id="phone"
                         onChange={this.handleChange.bind(this)} 
                         value={data.phone}
                         placeholder="Enter phone" />
-                    
-                </CCol>
-               
-              </CFormGroup>
+                    </CCol>
+               </CFormGroup>
      </CForm>
             </CCardBody>
             <CCardFooter>
-              
-              <CButton type="submit" 	  onClick={this.handleSubmit} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
+             <CButton type="submit" 	  onClick={this.handleSubmit} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
               <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
             </CCardFooter>
           </CCard>
@@ -178,8 +164,6 @@ render() {
   )
 }
  }
-
-
 const mapStateToProps = (state) => ({
   ...state
 })

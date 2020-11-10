@@ -41,7 +41,7 @@ class Addbuisness extends React.Component {
   componentDidMount = async () => {
     await this.props.get_category_data()
     this.getMyLocation()
-    // await this.props.get_subcategory_data_byid(3); //     
+   
   }
   getMyLocation() {
     const location = window.navigator && window.navigator.geolocation
@@ -105,7 +105,7 @@ return is_valid;
 
   onClick = async e =>{
     let parentCatID = e.target.value;
-    console.log(parentCatID);
+   
     this.props.get_subcategory_data_byid(parentCatID);
   }
 	onChange = async e => {
@@ -131,13 +131,10 @@ return is_valid;
 	async handleSubmit(event) {
     const {isAdded} = this.props.user;
 		event.preventDefault();
-    // if (!this.formValidate()) {
-		// 	return;
-    // }
-    // alert('helloo')
+
 		const { data,latitude,longitude } = this.state;
     const business = this.props.allbuisness.create_buisness.status;
-    console.log(business,'123445')
+    // console.log(business,'123445')
 		const payload = {
       name: data.name,
      phone:data.phone,
@@ -167,22 +164,13 @@ return is_valid;
   render() {
   const subcategory = this.props.category.subcategoryid_list.categories;
   const categorydata = this.props.category.category_list.categories;
-  const businessneww = this.props.allbuisness.create_buisness.data;
-
-  const { data, errors, latitude, longitude } = this.state;
-  const subid = data.cat_id;
-
-  // console.log(categorydata,'categorydata')
-  return (
-
-    
-    <>
- 
-     <CCard>
-            <CCardHeader>
+ const { data, errors, latitude, longitude } = this.state;
+return (
+ <>
+ <CCard>
+   <CCardHeader>
               Add Buisness 
-          
-            </CCardHeader>
+          </CCardHeader>
             <CCardBody>
               <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
               <CFormGroup row>
@@ -218,9 +206,7 @@ return is_valid;
                     onChange={this.onChange} value= {data.subcat_id}>
                     <option  value={0}> choose a subcategory </option>
                     {subcategory !== undefined ? subcategory.map((category, index) => (
-                      
-        <option value={category.id}>  {category.name}  </option>
-    )) : ""}
+                    <option value={category.id}>  {category.name}  </option>)) : ""}
                     </CSelect>
                     {errors.parent_id ? (
 										<CLabel className="is-invalid text-danger">
@@ -239,13 +225,13 @@ return is_valid;
                 
                 <CCol xs="12" md="9">
                 <CInput 
-					    name="name"
+					             name="name"
                         id="name"
                         onChange={this.onChange}
                         value={data.name}
                         invalid={!!errors.name}
 											  placeholder="Enter user name" />
-                   {errors.name ? (
+                        {errors.name ? (
 										<CLabel className="is-invalid text-danger">
 											{errors.name}
 										</CLabel>
@@ -263,12 +249,12 @@ return is_valid;
                 
                 <CCol xs="12" md="9">
                 <CInput 
-					    name="phone"
+					              name="phone"
                         id="phone"
                         onChange={this.onChange}
                         value={data.phone}
                         invalid={!!errors.phone}
-						placeholder="Enter phone number" />
+					            	placeholder="Enter phone number" />
                    {errors.phone ? (
 				 <CLabel className="is-invalid text-danger">
 											{errors.phone}

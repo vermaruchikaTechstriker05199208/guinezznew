@@ -1,4 +1,4 @@
-import {allBuisness,createBuisness,getBuisnessById} from '../queries';
+import {allBuisness,createBuisness,getBuisnessById,viewBuisnessById} from '../queries';
 import { checkResponse } from "../../constants/index"
 export const get_buisnsess_data = payload => async dispatch => {
   let response = await allBuisness(payload);
@@ -47,6 +47,25 @@ export const get_buisness_data_byid = payload => async dispatch => {
   if (response.success) {
     dispatch({
       type: "BUISNESS_DATA_ID",
+      payload: response.data.data
+    });
+  } else {
+    dispatch(
+      {
+        type: "ERROR_OCCURED",
+        payload: response.error
+      }
+    )
+  }
+
+};
+export const Viewbuisness_data_byid = payload => async dispatch => {
+  let response = await viewBuisnessById(payload);
+  response = checkResponse(response);
+ 
+  if (response.success) {
+    dispatch({
+      type: "VIEW_BUISNESS_DATA_ID",
       payload: response.data.data
     });
   } else {

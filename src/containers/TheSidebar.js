@@ -29,10 +29,10 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none" to="/allusers">
 
       {/* <img src={Logoimage}></img> */}
-      <img style={{width: "60%",margin:"auto"}} src={Logowhite}></img>
+      <img style={{width: "50%",margin:"10px auto"}} src={Logowhite}></img>
       </CSidebarBrand>
       <CSidebarNav>
 

@@ -14,8 +14,10 @@ import {
   CCardFooter
 
 } from '@coreui/react'
+import * as moment from 'moment'
 import CIcon from '@coreui/icons-react'
 import {create_category,get_category_data,get_category_data_byid,get_subcategory_data_byid} from "../../../redux/categories/action";
+import {get_user_data_byid} from "../../../redux/user/action";
 import { connect } from "react-redux";
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,53 +26,19 @@ import { toast } from 'react-toastify';
 const fields = ['name','description','action']
 class Viewuser extends React.Component {
 
-  constructor(props) {
-		super(props);
-
-		this.state = {
-            info:'false',
-            data: {},
-            subcatdata:{},
-            errors: {},
-            showHide: false,
-			showMore: false,
-			popup: false,
-        };
-        this.onSelect = this.onSelect.bind(this);
-	}
+  
 
   
-    handleModalShowHide() {
-		this.setState({ showHide: !this.state.showHide })
-        this.setState({ popup: true })
-       
-	}
-    onSelect = async e =>{
-        let parentCatID = e.target.value;
-        console.log(parentCatID,'iddd');
-        this.props.get_subcategory_data_byid(parentCatID);
-      }
+   
+  
 
 
     componentDidMount = async () => {
-        // await this.props.get_subcategory_data_byid(this.props.match.params.clientId);
-        // await this.props.get_category_data_byid(this.props.match.params.clientId);
-        //  let selectedClient = this.props.category.categoryid_list.category;
-
-        
-        // await this.setState({
-        //   data: selectedClient,
-        //   id: this.props.match.params.clientId
-        // });
-      }
+        await this.props.get_user_data_byid(this.props.match.params.clientId);
+        const userdata = this.props.user;
+     }
   render() {
-  const categorydata = this.props.category.subcategoryid_list.categories;
-  const parentcategorydata = this.props.category.categoryid_list.category;
-  console.log(parentcategorydata,'categorydata')
-  const {isAdded} = this.props.category;
-
-  const { data,subcatdata, errors } = this.state;
- console.log(data.name,'data')
+  const userdata = this.props.user.update_user_id.data;
 
   return (
     <>
@@ -79,8 +47,35 @@ class Viewuser extends React.Component {
               View User
             </CCardHeader>
             <CCardBody>
-             
-        
+  {userdata ? <table  class="table table-striped" >
+  <tbody>
+                       <tr>
+                         <th>First Name</th>
+                         <td >{userdata.user.first_name}</td>
+                       </tr>
+                       <tr>
+                         <th>Last Name</th>
+                         <td>{userdata.user.last_name}</td>
+                       </tr>
+                       <tr>
+                       <th>Email</th>
+                         <td >{userdata.user.email}</td>
+                       </tr>
+                       <tr>
+                       <th>Phone</th>
+                         <td>{userdata.user.phone}</td>
+                       </tr>
+                       <tr>
+                       <th >Created on</th>
+                         <td> {moment(userdata.user.created_at).format('MMMM Do YYYY')}</td>
+                       </tr>
+                         </tbody> </table>
+                      : <div class="d-flex justify-content-center">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </div>}
+                    
             </CCardBody>
             <CCardHeader>
               
@@ -102,4 +97,4 @@ class Viewuser extends React.Component {
 const mapStateToProps = (state) => ({
   ...state
 })
-export default connect(mapStateToProps, {get_subcategory_data_byid, create_category,get_category_data,get_category_data_byid })(Viewuser);
+export default connect(mapStateToProps, {get_user_data_byid,get_subcategory_data_byid, create_category,get_category_data,get_category_data_byid })(Viewuser);

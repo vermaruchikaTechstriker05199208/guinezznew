@@ -17,7 +17,7 @@ const TheHeaderDropdownMssg = () => {
       className="c-header-nav-item mx-2"
       direction="down"
     >
-      <CDropdownToggle className="c-header-nav-link" caret={false}>
+      {/* <CDropdownToggle className="c-header-nav-link" caret={false}>
         <CIcon name="cil-envelope-open" /><CBadge shape="pill" color="info">{itemsCount}</CBadge>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
@@ -119,7 +119,7 @@ const TheHeaderDropdownMssg = () => {
           </div>
         </CDropdownItem>
         <CDropdownItem href="#" className="text-center border-top"><strong>View all messages</strong></CDropdownItem>
-      </CDropdownMenu>
+      </CDropdownMenu> */}
     </CDropdown>
   )
 }

@@ -7,8 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { icons } from './assets/icons'
-// import logo from  "../src/images";
-import Logoimage from "../src/assets/icons/logoimage";
+
 import { Provider } from 'react-redux'
 // import store from './store'
 import { configureStore } from "./redux/store";

@@ -16,7 +16,7 @@ const TheHeaderDropdownTasks = () => {
       inNav
       className="c-header-nav-item mx-2"
     >
-      <CDropdownToggle className="c-header-nav-link" caret={false}>
+      {/* <CDropdownToggle className="c-header-nav-link" caret={false}>
         <CIcon name="cil-list" />
         <CBadge shape="pill" color="warning">{itemsCount}</CBadge>
       </CDropdownToggle>
@@ -51,7 +51,7 @@ const TheHeaderDropdownTasks = () => {
           <CProgress size="xs" color="success" value={100} />
         </CDropdownItem>
         <CDropdownItem className="text-center border-top"><strong>View all tasks</strong></CDropdownItem>
-      </CDropdownMenu>
+      </CDropdownMenu> */}
     </CDropdown>
   )
 }

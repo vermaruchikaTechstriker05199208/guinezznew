@@ -1,6 +1,6 @@
 import {categoryData,createCategory,deleteCategory,editCategory,getCategoryById,getSubcatById} from '../queries';
 import { checkResponse } from "../../constants/index";
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 /* LISTCLIENT */
 export const get_category_data = payload => async dispatch => {
   let response = await categoryData(payload);
@@ -84,13 +84,13 @@ export const edit_category = payload => async dispatch => {
     response = checkResponse(response);
     
     if (response.success) {
-      toast.success("category updated sucefully");
+
       dispatch({
         type: "CREATE_CATEGORY",
         payload: response
       });
     } else {
-      toast.error(response.message);
+    
       dispatch(
         {
           type: "ERROR_OCCURED",

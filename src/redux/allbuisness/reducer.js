@@ -4,6 +4,7 @@ const INIT_STATE = {
     buisness_id:{},
     create_buisness:{},
      isAdded: false,
+     view_buisness_id:{},
     error: ""
 };
 
@@ -30,6 +31,13 @@ export default (state = INIT_STATE, action) => {
                     isAdded: true,
                     error: "",
                 };
+                case "VIEW_BUISNESS_DATA_ID":
+                    return {
+                        ...state,
+                        view_buisness_id: action.payload,
+                        isAdded: true,
+                        error: "",
+                    };
         default:
             return state;
     }

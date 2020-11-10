@@ -24,7 +24,14 @@ export const userData = (data) => {
 		.then(response => response)
 		.catch(err => err.response);
 } 
-
+export const userProfile = (data) => {
+	return axios
+		.get(`${API_BASE_URL_LOCAL}/profile`, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
+}
 export const registerUser = (data) => {
 	return axios
 		.post(`${API_BASE_URL_LOCAL}/register`, data )
@@ -35,12 +42,30 @@ export const registerUser = (data) => {
 
 export const deleteUser = (data) => {
 	return axios
-		.delete(`${API_BASE_URL_LOCAL}/delete-category/${data}`, {
+		.delete(`${API_BASE_URL_LOCAL}/delete-user/${data}`, {
       headers: headertoken
 		})
 		.then(response => response)
 		.catch(err => err.response);
 }
+export const editUser = (data) => {
+	return axios
+		.put(`${API_BASE_URL_LOCAL}/user/${data.id}`, data, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
+}
+
+export const getUserdataById = (id) => {
+	return axios
+		.get(`${API_BASE_URL_LOCAL}/user/${id}`, {
+      	headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
+}
+
 
 //categorydata
 
@@ -112,7 +137,7 @@ export const editCategory = (data) => {
 
 export const allBuisness = (data) => {
   return axios
-  .get(`${API_BASE_URL_LOCAL}/all-businesses`, {
+  .post(`${API_BASE_URL_LOCAL}/all-businesses`,data, {
     headers: headertoken
   })
   .then(response => response)
@@ -138,6 +163,14 @@ export const getBuisnessById = (id) => {
   .catch(err => err.response);
 }
 
+export const viewBuisnessById = (id) => {
+	return axios
+		.get(`${API_BASE_URL_LOCAL}/business-detail/${id}`, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
+}
 
 // export const getBuisnessById = (id) => {
 // 	return axios

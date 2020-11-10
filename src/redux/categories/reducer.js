@@ -2,6 +2,7 @@ const INIT_STATE = {
    
     category_list: {},
     subcategory_list:{},
+    create_category:{},
     categoryid_list:{},
     update_list:{},
     subcategoryid_list:{},
@@ -28,6 +29,7 @@ export default (state = INIT_STATE, action) => {
                 case "CREATE_CATEGORY":
                     return {
                         ...state,
+                        create_category:action.payload,
                         isAdded: true,
                         error: "",
                     };

@@ -11,14 +11,16 @@ import {
   CCol,
   CInput,
   CTextarea,
-  CCardFooter
+  CCardFooter,
+
+  CRow
 
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import {create_category,get_category_data,get_category_data_byid,get_subcategory_data_byid} from "../../../redux/categories/action";
-import {get_buisness_data_byid} from "../../../redux/allbuisness/action";
-import { connect } from "react-redux";
 
+import {get_buisness_data_byid,Viewbuisness_data_byid,} from "../../../redux/allbuisness/action";
+import { connect } from "react-redux";
+import * as moment from 'moment'
 import 'react-toastify/dist/ReactToastify.css';
 
 import { toast } from 'react-toastify';
@@ -34,54 +36,83 @@ class Viewbuisness extends React.Component {
             subcatdata:{},
             errors: {},
             showHide: false,
-			showMore: false,
-			popup: false,
+			      showMore: false,
+			      popup: false,
         };
         this.onSelect = this.onSelect.bind(this);
 	}
-
-  
-    handleModalShowHide() {
+handleModalShowHide() {
 		this.setState({ showHide: !this.state.showHide })
         this.setState({ popup: true })
-       
-	}
+      	}
     onSelect = async e =>{
         let parentCatID = e.target.value;
-        console.log(parentCatID,'iddd');
-        this.props.get_subcategory_data_byid(parentCatID);
+     this.props.get_subcategory_data_byid(parentCatID);
       }
-
-
-    componentDidMount = async () => {
+componentDidMount = async () => {
          await this.props.get_buisness_data_byid(this.props.match.params.clientId);
+         await this.props.Viewbuisness_data_byid(this.props.match.params.clientId);
       }
   render() {
-  const buisnessdata = this.props.allbuisness.buisness_id.message;
-console.log(this.props.match.params.clientId,'clientt')
- console.log(buisnessdata,'data')
-
-  return (
+  const buisnessdata = this.props.allbuisness.view_buisness_id.business;
+return (
     <>
      <CCard>
             <CCardHeader>
               View Buisness
             </CCardHeader>
             <CCardBody>
-              
-        
             </CCardBody>
             <CCardHeader>
-              {buisnessdata}
-          
+            {buisnessdata ?           
+                       <table class="table table-striped" >
+                         <tbody>
+                       <tr>
+                         <th >Buisness Name</th>
+                         <td >{buisnessdata.name}</td>
+                       </tr>
+                       <tr>
+                         <th >Buisness Email</th>
+                         <td >{buisnessdata.email}</td>
+                       </tr>
+                       <tr>
+                       <th>Address</th>
+                         <td>{buisnessdata.address}</td>
+                       </tr>
+                       <tr>
+                       <th>DirectMarketing </th>
+                         <td>{buisnessdata.dm == 0 ? 'Yes' : "No"}</td>
+                       </tr>
+                       <tr>
+                       <th>Home Delivery </th>
+                         <td>{buisnessdata.home_delivery == 0 ? 'Yes' : "No"}</td>
+                       </tr>
+                       <tr>
+                       <th>Phone call </th>
+                         <td>{buisnessdata.phone_call == 0 ? 'Yes' : "No"}</td>
+                       </tr>
+                       <tr>
+                       <th>Service Description </th>
+                         <td>{buisnessdata.services_description}</td>
+                       </tr>
+                       <tr>
+                       <th>Created On </th>
+                         <td>{moment(buisnessdata.created_at).format('MMMM Do YYYY')}</td>
+                       </tr>
+                       <tr>
+                       <th>Updated  On </th>
+                         <td>{moment(buisnessdata.updated_at).format('MMMM Do YYYY')}</td>
+                       </tr>
+                       </tbody>
+                     </table>: <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>}
             </CCardHeader>
             <CCardBody>
-              
-            
-        
-             </CCardBody>
+                </CCardBody>
           </CCard>
-      
     </>
   )
 }
@@ -91,4 +122,4 @@ console.log(this.props.match.params.clientId,'clientt')
 const mapStateToProps = (state) => ({
   ...state
 })
-export default connect(mapStateToProps, {get_subcategory_data_byid, create_category,get_category_data,get_category_data_byid,get_buisness_data_byid })(Viewbuisness);
+export default connect(mapStateToProps, {get_buisness_data_byid ,Viewbuisness_data_byid})(Viewbuisness);

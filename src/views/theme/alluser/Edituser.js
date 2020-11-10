@@ -14,8 +14,8 @@ import {
   CInput
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import {get_category_data,edit_category,get_category_data_byid} from "../../../redux/categories/action";
-
+// import {get_category_data,edit_category,get_category_data_byid,} from "../../../redux/categories/action";
+import {get_user_data_byid} from "../../../redux/user/action";
 import { connect } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,31 +24,28 @@ import { toast } from 'react-toastify';
 class Edituser extends React.Component {
 
   constructor(props) {
-		super(props);
-
-		this.state = {
+    super(props);
+    	this.state = {
       data: {}
-
-    };
+ };
     this.formValidate = this.formValidate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount = async () => {
 
-    await this.props.get_category_data_byid(this.props.match.params.clientId);
-    let selectedClient = this.props.category.categoryid_list.category;
-
-    
-    // await this.setState({
-    //   data: selectedClient,
-    //   id: this.props.match.params.clientId
-    // });
+    await this.props.get_user_data_byid(this.props.match.params.clientId);
+    let selectedClient = this.props.user.update_user_id.data.user;
+      await this.setState({
+      data: selectedClient,
+      id: this.props.match.params.clientId
+    });
   }
 
   formValidate = () => {
     let { data, error } = this.state;
     let fieldList = [
       "first_name",
+      "last_name",
       "email",
       "phone",
     ];
@@ -85,14 +82,17 @@ handleSubmit(event) {
     }
 		const payload = {
      id: data.id, 
-     name:data.name,
-     description:data.description
+     first_name:data.first_name,
+     last_name:data.last_name,
+     email:data.email,
+     phone:data.phone
     };
+    
     const sendData = JSON.stringify(payload);
     this.props
-      .edit_category(payload)
+      .edit_user(payload)
       .then(async () => {
-        this.props.history.push("/allcategory");
+        this.props.history.push("/allusers");
         this.setState({
           isLogin: false
         });
@@ -117,7 +117,7 @@ render() {
           <CFormGroup row>
                 
                 <CCol md="3">
-                  <CLabel htmlFor="select">Name</CLabel>
+                  <CLabel htmlFor="select">First Name</CLabel>
                 </CCol>
                 
                 <CCol xs="12" md="9">
@@ -125,50 +125,49 @@ render() {
                         id="first_name"
                         onChange={this.handleChange.bind(this)} 
                         value={data.first_name}
-                      
-											  placeholder="Enter name" />
-                   
-                </CCol>
-               
+                       placeholder="Enter name" /> </CCol>
               </CFormGroup>
               <CFormGroup row>
-                
                 <CCol md="3">
-                  <CLabel htmlFor="select">Description</CLabel>
+                  <CLabel htmlFor="select">Last Name</CLabel>
                 </CCol>
-                
-                <CCol xs="12" md="9">
+                 <CCol xs="12" md="9">
+                <CInput  name="last_name"
+                        id="last_name"
+                        onChange={this.handleChange.bind(this)} 
+                        value={data.last_name}
+                       placeholder="Enter name" />
+                   </CCol>
+                 </CFormGroup>
+              <CFormGroup row>
+                  <CCol md="3">
+                  <CLabel htmlFor="select">Email</CLabel>
+                </CCol>
+                 <CCol xs="12" md="9">
                 <CInput 
 					          	name="email"
                         id="email"
                         onChange={this.handleChange.bind(this)} 
                         value={data.email}
                         placeholder="Enter email" />
-                    
-                </CCol>
-               
-              </CFormGroup>
+                     </CCol>
+               </CFormGroup>
               <CFormGroup row>
-                
-                <CCol md="3">
+               <CCol md="3">
                   <CLabel htmlFor="select">Phone</CLabel>
                 </CCol>
-                
-                <CCol xs="12" md="9">
+                  <CCol xs="12" md="9">
                 <CInput 
 					          	name="phone"
                         id="phone"
                         onChange={this.handleChange.bind(this)} 
                         value={data.phone}
                         placeholder="Enter phone" />
-                    
-                </CCol>
-               
-              </CFormGroup>
+                    </CCol>
+               </CFormGroup>
      </CForm>
             </CCardBody>
             <CCardFooter>
-              
               <CButton type="submit" 	  onClick={this.handleSubmit} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
               <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
             </CCardFooter>
@@ -178,9 +177,7 @@ render() {
   )
 }
  }
-
-
 const mapStateToProps = (state) => ({
   ...state
 })
-export default connect(mapStateToProps, { get_category_data ,edit_category,get_category_data_byid})(Edituser);
+export default connect(mapStateToProps, { get_user_data_byid,get_user_data_byid})(Edituser);

@@ -34,7 +34,8 @@ const getBadge = action => {
   class Alluser extends React.Component {
    componentDidMount = async () => {
       await this.props.get_user_list()
-      await this.props.delete_user()
+      // await this.props.get_user_profile()
+      // await this.props.delete_user()
     }
     confirmDialod = (id) => {
       Swal.fire({
@@ -54,7 +55,7 @@ const getBadge = action => {
   }
      render(){
       const tabledata = this.props.user.user_list.users;
-      console.log(tabledata,'tabless')
+      
   
    return (
     <>
@@ -81,7 +82,7 @@ const getBadge = action => {
                     <tr>
                            <td><CButton type="submit" size="sm" onClick={e => this.props.history.push('/viewuser/' + tabledata.id)}   color="info">view</CButton></td>
                            <td><CButton type="submit" size="sm"  onClick={e => this.props.history.push('/edituser/' + tabledata.id)}  color="success">edit</CButton></td>
-                      <td> <CButton type="submit" size="sm"  color="danger" >delete</CButton></td>
+                      <td> <CButton type="submit" size="sm"  color="danger"  onClick={e => this.confirmDialod( tabledata.id)}  >delete</CButton></td>
                  </tr>
                    )
  }}

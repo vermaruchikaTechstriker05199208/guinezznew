@@ -96,8 +96,9 @@ if(data){
    
     };
 await this.props.create_category(payload);
+const categorydatastatus = this.props.category.create_category.data.status;
+{categorydatastatus == 201 ? toast.success("SubCategory added sucessfully.") : toast.error("THe given data was invalid")}
 
-{payload ?  toast.success("Category added sucessfully.") : toast.success("no Category added, data is invalid ")}
   }
 }
   componentDidMount = async () => {

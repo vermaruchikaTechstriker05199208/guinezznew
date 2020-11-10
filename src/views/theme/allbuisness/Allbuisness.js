@@ -11,32 +11,28 @@ import {
 } from '@coreui/react'
 import { DocsLink } from 'src/reusable'
 import { connect } from "react-redux";
-
 import {
   get_user_list,
   
 } from "../../../redux/user/action";
 import {get_buisnsess_data} from "../../../redux/allbuisness/action";
-// import ReactHtmlParser from 'react-html-parser';
+import DataTable from 'react-data-table-component';
+
 const fields = ['name','phone','email','action']
 
 
   class Allbuisness extends React.Component {
+ 
    componentDidMount = async () => {
       await this.props.get_user_list()
       await this.props.get_buisnsess_data()
     }
      render(){
  const allbuisness = this.props.allbuisness.business_list.businesses;
- console.log(allbuisness,'allbusiness')
-
-
-     return (
+ return (
     <>
- 
-    <CRow>
-  
-        <CCol xs="12" lg="12">
+ <CRow>
+  <CCol xs="12" lg="12">
           <CCard>
             <CCardHeader>
               Buisnesses
@@ -44,12 +40,11 @@ const fields = ['name','phone','email','action']
             </CCardHeader>
          {allbuisness ?    <CCardBody>
              {allbuisness ?  <CDataTable
-              items={allbuisness.data}
+              items={allbuisness}
               fields={fields}
               itemsPerPage={10}
               itemsPerPageSelect
-             
-               tableFilter
+              tableFilter
               pagination
               scopedSlots = {{
                 'action':
@@ -70,13 +65,9 @@ const fields = ['name','phone','email','action']
               <span class="sr-only">Loading...</span>
             </div>
           </div>}
-         
-
-             </CCard>
+        </CCard>
         </CCol>
-
-       
-      </CRow>
+       </CRow>
     </>
   )
 }
@@ -85,8 +76,6 @@ const fields = ['name','phone','email','action']
 const mapStateToProps = state => ({
   ...state
 });
-
-
 export default connect(mapStateToProps, {
   get_user_list,get_buisnsess_data
 })(Allbuisness);

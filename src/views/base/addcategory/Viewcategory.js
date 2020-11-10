@@ -199,7 +199,7 @@ console.log(datasubnew,'sfdfd')
                         onChange={this.handleChange.bind(this)} 
                         value={SubCategorydata.name}
                         invalid={!!errors.name}
-            placeholder="Enter your category name" />
+                        placeholder="Enter your category name" />
                    {errors.name ? (
           <CLabel className="is-invalid text-danger">
             {errors.name}
