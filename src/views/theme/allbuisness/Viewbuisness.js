@@ -80,7 +80,7 @@ return (
                          <td>{buisnessdata.address}</td>
                        </tr>
                        <tr>
-                       <th>DirectMarketing </th>
+                       <th>Direct Marketing </th>
                          <td>{buisnessdata.dm == 0 ? 'Yes' : "No"}</td>
                        </tr>
                        <tr>

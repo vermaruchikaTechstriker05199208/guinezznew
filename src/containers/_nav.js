@@ -90,11 +90,21 @@ export default [
       
     ],
   },
- 
+
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Suggestions',
+    to: '/allsuggestions',
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    badge: {
+      color: 'info',
+    
+    }
+  },
   {
     _tag: 'CSidebarNavItem',
     name: 'Logout',
-    to: '/login',
+    to: '/loginew',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     badge: {
       color: 'info',

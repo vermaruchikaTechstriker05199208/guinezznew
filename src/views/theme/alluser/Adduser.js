@@ -302,7 +302,7 @@ return is_valid;
             </CCardBody>
             <CCardFooter>
               <CButton type="submit" 	onClick={this.handleSubmit} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
-              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
+            
             </CCardFooter>
           </CCard>
           <ToastContainer hideProgressBar={true} />

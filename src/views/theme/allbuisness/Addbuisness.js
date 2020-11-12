@@ -134,7 +134,7 @@ return is_valid;
 
 		const { data,latitude,longitude } = this.state;
     const business = this.props.allbuisness.create_buisness.status;
-    // console.log(business,'123445')
+  
 		const payload = {
       name: data.name,
      phone:data.phone,
@@ -545,7 +545,7 @@ return (
                   <CCol xs="12" md="9">
                     <CInput 
                       name="services_description" 
-                      
+                      fieldName
                       id="services_description" 
                       rows="9"
                       value={data.services_description}
@@ -567,7 +567,7 @@ return (
             </CCardBody>
             <CCardFooter>
               <CButton type="submit" 	onClick={this.handleSubmit} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
-              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
+           
             </CCardFooter>
           </CCard>
           <ToastContainer hideProgressBar={true} />

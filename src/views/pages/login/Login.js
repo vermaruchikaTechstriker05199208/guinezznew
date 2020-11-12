@@ -12,98 +12,36 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow
+  CRow,
+  CLabel
+
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import { do_login } from "../../../redux/auth/action";
+import { toast } from 'react-toastify';
 import validators from '../../pages/validators';
 // import Logoimage from "../images/logo.png";
 import Logowhite from "../../../images/logo_white.png";
 
 class Login extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
+		super(props);
+		this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+		this.state = {
       email: "",
       password: "",
-      error: null,
-      sucsess: '',
-      visible: true,
-      isLogin: false
-    };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.validators = validators;
-    this.onInputChange = this.onInputChange.bind(this);
-    this.doLogin = this.doLogin.bind(this);
-    this.showErrors = this.showErrors.bind(this);
-    this.formValidators = this.formValidators.bind(this);
-    
-  }
-  handleClick() {
-    var elem = document.getElementById("loginform");
-    elem.style.transition = "all 2s ease-in-out";
-    elem.style.display = "none";
-    document.getElementById("recoverform").style.display = "block";
-  }
- 
-  formValidators(fieldName, value) {
-    this.validators[fieldName].errors = [];
-    this.validators[fieldName].state = value;
-    this.validators[fieldName].valid = true;
-    if (fieldName == 'email') {
-      this.validators[fieldName].rules.forEach(rule => {
-        if (rule.test instanceof RegExp) {
-          if (!rule.test.test(value)) {
-            this.validators[fieldName].errors.push(rule.message);
-            this.validators[fieldName].valid = false;
-          }
-        } else if (typeof rule.test === "function") {
-          if (!rule.test(value)) {
-            this.validators[fieldName].errors.push(rule.message);
-            this.validators[fieldName].valid = false;
-          }
-        }
-      });
-    }
-    if (fieldName == 'password') {
-      this.validators[fieldName].rules.forEach(rule => {
-        if (rule.test instanceof RegExp) {
-          if (!rule.test.test(value)) {
-            this.validators[fieldName].errors.push(rule.message);
-            this.validators[fieldName].valid = false;
-          }
-        } else if (typeof rule.test === "function") {
-          if (!rule.test(value)) {
-            this.validators[fieldName].errors.push(rule.message);
-            this.validators[fieldName].valid = false;
-          }
-        }
-      });
-    }
-  }
-
-  showErrors(fieldName) {
-    const validator = this.validators[fieldName];
-    const result = "";
-    if (validator && !validator.valid) {
-      const errors = validator.errors.map((info, index) => {
-        return (
-          <span className="error" key={index}>
-            * {info}
-            <br />
-          </span>
-        );
-      });
-      return <div className="error mb-2">{errors}</div>;
-    }
-    return result;
-  }
-
+	        data: {},
+			errors: {}
+		};
+	}
   componentDidMount = async () => {
+
     // if (localStorage.getItem('user') && localStorage.getItem('user') != undefined) {
-    //    this.props.history.push("/dashboard");
+    //    this.props.history.push("/allusers");
     // }
  
     if (localStorage.getItem('sendemail') !== undefined && localStorage.getItem('sendemail') !== "") {
@@ -118,65 +56,114 @@ class Login extends React.Component {
       visible: !!nextProps.auth.error
     });
   };
-	validForm() {
-		let status = true;
-		Object.keys(this.validators).forEach(field => {
-			if (field === "email" || field === "password") {
-				if (!this.validators[field].valid) {
-					status = false;
-				}
-			}
+  formValidate = () => {
+		let { data } = this.state;
+		let fieldList = [
+
+    "email",
+    "password",
+
+    
+		];
+	
+		let is_valid = true;
+		for (let x of fieldList) {
+			if (!data[x]) {
+				is_valid = false;
+				this.setState(prevState => ({
+					errors: { ...prevState.errors, [x]: "Please fill in the above field" }
+				}));
+            }
+            if (data["email"]) {
+                var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if (!regex.test(String(data["email"]).toLowerCase())) {
+                    is_valid = false;
+                    this.setState(prevState => ({
+                        errors: {
+                            ...prevState.errors,
+                            email: "Please fill in correct email address"
+                        }
+                    }));
+                }
+            }
+          
+            if(data['password'] != "" && data['password'] != undefined){
+                var regularExpression = /^(?=.*\d).{8,20}$/;
+                if(!regularExpression.test(data['password'])){
+                    is_valid = false;
+                    this.setState(prevState => ({
+                        errors: {
+                            ...prevState.errors,
+                            password: "Your password should be at least 8 characters long"
+                        }
+                    }));	
+                }
+            }
+           
+		}
+return is_valid;
+	};
+
+	onChange = async e => {
+		this.setState({
+			data: { ...this.state.data, [e.target.name]: e.target.value },
+			errors: { ...this.state.errors, [e.target.name]: "" }
 		});
-		return status;
-	}
-  onInputChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-    this.formValidators([event.target.name], event.target.value);
-   
-  }
-  onDismiss() {
-    this.setState({
-      visible: false
-    });
-  }
+		if (!e.target.value) {
+			this.setState({
+				errors: {
+					...this.state.errors,
+					[e.target.name]: "Please fill in the above field"
+				}
+			});
+		}
 
-  doLogin(event) {
-    event.preventDefault();
-    this.setState({
-      isLogin: true
-    });
-    const { email, password } = this.state;
- 
+	};
 
-    this.props
-      .do_login({ email, password })
-      .then(async () => { 
-        var user = localStorage.getItem('user');
-        user = JSON.parse(user);
-        	localStorage.setItem("email", email);
-         const message = this.props.auth.user.status;
-        {message ==200 ? this.props.history.push("/allusers") : this.props.history.push("/login");}
-
-
-        this.setState({showMessage: true});
-        this.setState({
-          isLogin: false
-        });
-      })
-      .catch(err => {
-        console.log("err", err);
+	async handleSubmit(event) {
+    const {isAdded} = this.props.user;
+		event.preventDefault();
+    if (!this.formValidate()) {
+			return;
+		}
+    const {email,password} = this.state;
+    const { data } = this.state;
+  
+		const payload = {
+      password:data.password,
+       email:data.email,
+	  
+    };
+console.log(payload,'payload')
+ await this.props
+    .do_login(payload)
+    .then(async () => { 
+      var user = localStorage.getItem('user');
+     
+      user = JSON.parse(user);
+        localStorage.setItem("email", email);
+       const message = this.props.auth.user.status;
+       console.log(message,'status')
+      {message ==200 ? this.props.history.push("/allusers") : this.props.history.push("/login")}
+    
+this.setState({showMessage: true});
+      this.setState({
+        isLogin: false
       });
-  }
-
-
+    })
+    .catch(err => {
+      console.log("err", err);
+    });
+	}
+render() {
+   const message = this.props.auth.user.data;
+   const { isLogin, sucsess ,errors} = this.state;
+   const { data} = this.state;
+   let token = localStorage.getItem("accessToken");
+   const messagenew = this.props.auth.user.status;
+     
 
   
-  render() {
-   const message = this.props.auth.user.data;
-   const { isLogin, sucsess } = this.state;
-
     return (
       
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -197,12 +184,18 @@ class Login extends React.Component {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      
-                      <CInput type="email"   id="email"  name="email" value={this.state.email}   onChange={this.onInputChange}
-                     placeholder="Email" autoComplete="username" />
+                     
+                      <CInput type="email"   id="email"  name="email"  value={data.email}  invalid={!!errors.email}  onChange={this.onChange}
+                     placeholder="Email" required autoComplete="username" />
                     </CInputGroup>
-                    <div style={{color: "red"}}><h5>  {this.showErrors("email")}</h5></div>
-                   
+                
+                    {errors.email ? (
+										<CLabel className="is-invalid text-danger">
+											{errors.email}
+										</CLabel>
+									) : (
+										""
+									)}
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -210,49 +203,27 @@ class Login extends React.Component {
                         </CInputGroupText>
                       </CInputGroupPrepend>
                   
-                      <CInput type="password" 
+                      <CInput 
+                          type="password" 
                           id="password"
                           name="password"
-                          value={this.state.password}
-                          onChange={this.onInputChange}
-                          
+                          invalid={!!errors.password}
+                          value={data.password}
+                          onChange={this.onChange}
                           placeholder="Password" autoComplete="current-password" />
                     </CInputGroup>
-                    <div style={{color: "red"}}><h5>  {this.showErrors("password")}</h5></div>
-                  
+                    {errors.password ? (
+										<CLabel className="is-invalid text-danger">
+											{errors.password}
+										</CLabel>
+									) : (
+										""
+									)}
+                
                     <CRow>
                       <CCol xs="6">
-                        
-                        {/* <CButton color="primary" disabled={!this.validForm()}  onClick={this.doLogin} className="px-4">Login</CButton> */}
-
-                        {!isLogin ? (
-													<CButton
-														color="primary"
-														onClick={this.doLogin}
-														size="lg"
-														type="submit"
-
-														disabled={!this.validForm()}
-													>
-														Log In
-												</CButton>
-												) : ''}
-												{isLogin ? (
-													<CButton
-														color="primary"
-														onClick={this.doLogin}
-														size="lg"
-														type="submit"
-													
-														disabled={isLogin}
-													>
-													
-														Log In
-
-													</CButton>
-                       
-												) : ''}
-                       
+                      
+                     <CButton type="submit" 		onClick={this.handleSubmit}  size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>   
  </CCol>
 
                    

@@ -8,6 +8,7 @@ import {
   CDataTable,
   CRow,
   CButton,
+
   
 
 } from '@coreui/react'
@@ -18,10 +19,11 @@ import 'sweetalert2/src/sweetalert2.scss'
 import { Redirect } from 'react-router-dom';
 import {
   get_user_list,delete_user
-  
 } from "../../../redux/user/action";
-import * as moment from 'moment'
-const fields = ['first_name','email','phone','updated on','action']
+import  {get_suggestion_list} from "../../../redux/suggestion/action";
+import ShowMoreText from 'react-show-more-text';
+import ReadMoreReact from 'read-more-react';
+const fields = ['serial no' ,'from','subject','Message']
 const getBadge = action => {
   switch (action) {
     case 'Active': return 'success'
@@ -32,16 +34,15 @@ const getBadge = action => {
   }
   
 }
-  class Alluser extends React.Component {
+  class AllSuggestion extends React.Component {
    componentDidMount = async () => {
-
-      
       await this.props.get_user_list()
-   
+      await this.props.get_suggestion_list()
     }
-    componentDidUpdate(){
-      this.componentDidMount();
-}
+    executeOnClick(isExpanded) {
+      console.log(isExpanded);
+  }
+
   confirmDialod = (id) => {
     Swal.fire({
         title: 'Are you sure?',
@@ -59,11 +60,9 @@ const getBadge = action => {
 }
      render(){
       const tabledata = this.props.user.user_list.users;
-      
-     let token = localStorage.getItem("accessToken");
-   if (!token) {
-       return <Redirect to='/login' />
-        }
+    const suggestion = this.props.suggestion.suggestion_list.suggetions;  
+  
+    console.log(suggestion,'suggestion')
    return (
     <>
  
@@ -72,32 +71,37 @@ const getBadge = action => {
         <CCol xs="12" lg="12">
           <CCard>
             <CCardHeader>
-              All Users
+              All Suggestions
             
             </CCardHeader>
             <CCardBody>
-             {tabledata ?  <CDataTable
-              items={tabledata}
+             {suggestion ?  <CDataTable
+              items={suggestion}
               fields={fields}
               itemsPerPageSelect
              itemsPerPage={10}
               tableFilter
               pagination
               scopedSlots = {{
-                'action':
-                  (tabledata)=>(
-                    <tr>
-                           <td><CButton type="submit" size="sm" onClick={e => this.props.history.push('/viewuser/' + tabledata.id)}   color="info">view</CButton></td>
-                           <td><CButton type="submit" size="sm"  onClick={e => this.props.history.push('/edituser/' + tabledata.id)}  color="success">edit</CButton></td>
-                      <td> <CButton type="submit" size="sm"  color="danger"  onClick={e => this.confirmDialod( tabledata.id)}  >delete</CButton></td>
-
-                 </tr>
-                   ),
-                   'updated on':(tabledata)=>(
-                
-                   <td> {moment(tabledata.updated_at).format('MMMM Do YYYY')}</td>
-                   )
- }}
+                'serial no':(suggestion)=>(<td>{suggestion.id}</td>),
+                   'from':(suggestion)=>(<td>{suggestion.user.email}</td>),
+                 'Message':(suggestion)=> (<td style={{width: "40%"}}>
+          <ShowMoreText
+                /* Default options */
+                lines={3}
+                more='Show more'
+                less='Show less'
+                className='content-css'
+                anchorClass='my-anchor-css-class'
+                onClick={this.executeOnClick}
+                expanded={false}
+                width={480}
+            >
+               {suggestion.message}
+            </ShowMoreText>
+                 
+                 </td>)}}
+ 
             /> : <div class="d-flex justify-content-center">
             <div class="spinner-border" role="status">
               <span class="sr-only">Loading...</span>
@@ -119,5 +123,5 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps, {
-  get_user_list,delete_user
-})(Alluser);
+  get_user_list,delete_user,get_suggestion_list
+})(AllSuggestion);

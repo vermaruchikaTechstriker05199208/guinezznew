@@ -92,3 +92,10 @@ a.c-sidebar-nav-link.c-active {
     background-color: #fff !important;
     color:#a65d14 !important;
 }
+.page-link:hover {
+    z-index: 2;
+    text-decoration: none;
+    color: #d8dbe0;
+    background-color: #d97d1c;
+    border-color: #d97d1c;
+}

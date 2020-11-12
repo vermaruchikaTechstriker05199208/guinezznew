@@ -86,8 +86,8 @@ return is_valid;
     await this.props.create_category(payload);
      
      const categorydatastatus = this.props.category.create_category.data.status;
-     {categorydatastatus == 201 ? toast.success("Category added sucessfully.") : toast.error("THe given data was invalid")}
-     console.log(this.props.category.create_category.data,'nojgh')
+     {categorydatastatus == 201 ? toast.success("Category added sucessfully.") : toast.error("The name has already been taken.")}
+  
 	}
 
   componentDidMount = async () => {
@@ -163,7 +163,7 @@ return is_valid;
             </CCardBody>
             <CCardFooter>
               <CButton type="submit" 	onClick={this.handleSubmit} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
-              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
+            
             </CCardFooter>
           </CCard>
           <ToastContainer hideProgressBar={true} />

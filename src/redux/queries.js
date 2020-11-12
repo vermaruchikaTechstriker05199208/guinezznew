@@ -6,14 +6,16 @@ const headertoken ={
   'Accept': 'application/json',
   'Authorization': 'Bearer '+ token,
 } ; 
+
 // End Dashboard Section
 //For Login
 export const doLogin = (data) => {
     return axios
-        .post(`${API_BASE_URL_LOCAL}/login`, data)
+        .post(`${API_BASE_URL_LOCAL}/login`, data,)
         .then(response => response)
         .catch(err => err.response);
 }
+
 //userdata
 
 export const userData = (data) => {
@@ -172,11 +174,13 @@ export const viewBuisnessById = (id) => {
 		.catch(err => err.response);
 }
 
-// export const getBuisnessById = (id) => {
-// 	return axios
-// 		.post(`${API_BASE_URL_LOCAL}/businesses-by-category/${id}`, {
-//       	headers: headertoken
-// 		})
-// 		.then(response => response)
-// 		.catch(err => err.response);
-// }
+//view suggestion
+
+export const getSuggestion = (data) => {
+    return axios
+		.get(`${API_BASE_URL_LOCAL}/all-suggetions`, {
+      headers: headertoken
+		})
+		.then(response => response)
+		.catch(err => err.response);
+} 

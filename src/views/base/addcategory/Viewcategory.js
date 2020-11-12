@@ -17,10 +17,9 @@ import {
 import CIcon from '@coreui/icons-react'
 import {create_category,get_category_data,get_category_data_byid,get_subcategory_data_byid,edit_category} from "../../../redux/categories/action";
 import { connect } from "react-redux";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { Modal } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+
 const fields = ['name','description','action']
 class Viewcategory extends React.Component {
 
@@ -93,7 +92,7 @@ class Viewcategory extends React.Component {
          name:SubCategorydata.name,
          description:SubCategorydata.description
         };
-      console.log(payload,'dfdfa')
+
         
         const sendData = JSON.stringify(payload);
         this.props
@@ -111,7 +110,7 @@ class Viewcategory extends React.Component {
     }
     onSelect = async e =>{
       let parentCatID = e.target.value;
-      console.log(parentCatID,'iddd');
+     
       this.props.get_subcategory_data_byid(parentCatID);
     }
 
@@ -126,13 +125,11 @@ class Viewcategory extends React.Component {
         data: selectedClient,
         id: this.props.match.params.clientId
       });
-      console.log('on cancel!!');
+     
     }
   render() {
     const SubCategorydata = this.props.category.categoryid_list.category;
-    if(SubCategorydata) {
-      console.log(SubCategorydata.name,'SubCategorydata name');
-    }
+
     const categorydata = this.props.category.subcategoryid_list.categories;
      const {isAdded} = this.props.category;
     
@@ -249,7 +246,7 @@ console.log(datasubnew,'sfdfd')
 				</Modal>
              </CCardBody>
           </CCard>
-          <ToastContainer hideProgressBar={true} />
+
     </>
   )
 }

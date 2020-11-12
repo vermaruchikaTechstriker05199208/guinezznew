@@ -125,21 +125,20 @@ const userprofile = this.props.user.User_profile.my_profile;
                          <td >{userprofile.phone}</td>
                        </tr>
                        <tr>
-                       <th>Created On</th>
-                         <td>{moment(userprofile.updated_at).format('MMMM Do YYYY')}</td>
-                       </tr>
-                       <tr>
                        <th>Last Updated On</th>
                          <td>{moment(userprofile.updated_at).format('MMMM Do YYYY')}</td>
                        </tr>
                      
                          </tbody> </table>
-</CCol>
+   
+   </CCol>
+  
+ 
    </CRow> : ""}
                    
 					</Modal.Body >
 					<Modal.Footer className="footeralert">
-                    <CButton type="reset" size="sm" onClick={() => this.handleModalShowHide()} color="danger"> close</CButton>
+                    <CButton type="reset" size="sm" onClick={() => this.handleModalShowHide()} color="danger"><CIcon name="cil-ban" /> close</CButton>
         
 					</Modal.Footer>
 				</Modal>

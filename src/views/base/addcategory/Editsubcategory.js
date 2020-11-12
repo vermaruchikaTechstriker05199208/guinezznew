@@ -17,9 +17,8 @@ import CIcon from '@coreui/icons-react'
 import {get_category_data,edit_category,get_category_data_byid} from "../../../redux/categories/action";
 
 import { connect } from "react-redux";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
+
+
 
 class Editcategory extends React.Component {
 
@@ -153,10 +152,10 @@ render() {
             <CCardFooter>
               
               <CButton type="submit" 	  onClick={this.handleSubmit} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
-              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
+             
             </CCardFooter>
           </CCard>
-          <ToastContainer hideProgressBar={true} />
+    
     </>
   )
 }

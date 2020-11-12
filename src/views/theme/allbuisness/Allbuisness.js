@@ -51,7 +51,7 @@ const fields = ['name','phone','email','action']
                   (tabledata)=>(
                     <tr>
                       <td><CButton type="submit" size="sm" onClick={e => this.props.history.push('/viewbuisness/' + tabledata.id)}    color="info">view</CButton></td>
-                           <td><CButton type="submit" size="sm"  onClick={e => this.props.history.push('/editBuisness/' + tabledata.id)}   color="success">edit</CButton></td>
+
                       <td> <CButton type="submit" size="sm"  color="danger" >delete</CButton></td>
                     
                     </tr>

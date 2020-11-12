@@ -64,7 +64,7 @@ export const get_user_data_byid = payload => async dispatch => {
 export const get_user_profile = payload => async dispatch => {
   let response = await userProfile(payload);
   response = checkResponse(response);
-   console.log(response.data,'action')
+
   if (response.success) {
     dispatch({
       type: "USER_PROFILE",
@@ -105,22 +105,15 @@ export const delete_user = payload => async dispatch => {
   response = checkResponse(response);
 
   if (response.success) {
-    dispatch(get_user_list());
+    dispatch(get_user_list())
   } else {
     dispatch(
       {
         type: "ERROR_OCCURED",
-        _payload: response.error,
-        get payload() {
-          return this._payload;
-        },
-        set payload(value) {
-          this._payload = value;
-        },
+        payload: response.error
       }
     )
   }
 
 };
-
 

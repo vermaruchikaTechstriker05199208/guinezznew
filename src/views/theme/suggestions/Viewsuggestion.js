@@ -20,7 +20,7 @@ import {create_category,get_category_data,get_category_data_byid,get_subcategory
 import {get_user_data_byid} from "../../../redux/user/action";
 import { connect } from "react-redux";
 const fields = ['name','description','action']
-class Viewuser extends React.Component {
+class Viewsuggestion extends React.Component {
  componentDidMount = async () => {
         await this.props.get_user_data_byid(this.props.match.params.clientId);
         const userdata = this.props.user;
@@ -79,4 +79,4 @@ class Viewuser extends React.Component {
 const mapStateToProps = (state) => ({
   ...state
 })
-export default connect(mapStateToProps, {get_user_data_byid,get_subcategory_data_byid, create_category,get_category_data,get_category_data_byid })(Viewuser);
+export default connect(mapStateToProps, {get_user_data_byid,get_subcategory_data_byid, create_category,get_category_data,get_category_data_byid })(Viewsuggestion);
